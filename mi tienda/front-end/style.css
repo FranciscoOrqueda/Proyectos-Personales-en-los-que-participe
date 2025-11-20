@@ -1,0 +1,260 @@
+/* Estilos generales */
+body {
+    font-family:Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #062ee4;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    border-bottom-left-radius: 15px; /* Redondea la esquina inferior izquierda */
+    border-bottom-right-radius: 15px; /* Redondea la esquina inferior derecha */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+    animation: slideDownFadeIn 0.6s ease-out forwards; /* Aplicamos la nueva animación */
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display:inline;
+    margin: 0 15px;
+}
+/* modifica los enlaces del encabezado */
+header nav ul li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+/* Contenido Principal */
+main {
+    padding: 2rem;
+}
+main h2 {
+    text-align: center;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* --- LÍNEAS NUEVAS PARA LA ANIMACIÓN --- */
+    opacity: 0; /* Inicialmente invisibles */
+    animation: fadeInUp 0.5s ease-out forwards; /* Aplicamos la animación */
+}
+
+/* Efecto al pasar el mouse por encima */
+.product-card:hover {
+    transform: translateY(-3px); /* Se eleva un poco */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* La sombra se hace más pronunciada */
+}
+
+.product-card img {
+    width: 225px;
+    height: 200px;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.product-card button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+.view-product-btn:hover,
+.product-card button:hover {
+    transform: scale(1.05); /* Aumenta el tamaño a un 105% */
+    cursor: pointer; /* Asegura que el cursor sea una manito */
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes slideDownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-100%); /* Empieza arriba, fuera de la pantalla */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Termina en su posición final */
+    }
+}
+/* Efecto de transición al pasar el mouse por encima del botón */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+/* Animación para el efecto de escalado al abrir el modal */
+@keyframes scaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.carousel-container {
+    width: 825px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-slide {
+    display: flex; /* Coloca los productos uno al lado del otro */
+    transition: transform 0.5s ease-in-out; /* Añade una transición suave para la animación */
+    transform: translateX(0); /* Inicialmente, no hay desplazamiento */
+}
+
+.carousel-slide .product-card {
+    flex: 0 0 auto; /* No permite que los productos se encojan o crezcan, y calcula su ancho automáticamente */
+    margin-right: 1rem; /* Espacio entre las tarjetas de producto */
+}
+
+/* Opcional: Si no quieres que el último producto tenga margen a la derecha */
+.carousel-slide .product-card:last-child {
+    margin-right: 0;
+}
+/* Pie de página */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+/* --- ESTILOS PARA EL MODAL DE PRODUCTO (CON ANIMACIÓN) --- */
+
+/* El fondo oscuro semi-transparente */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Clase para hacerlo visible con JavaScript */
+.modal-overlay.visible {
+    display: flex;
+    animation: fadeIn 0.3s ease-out; /* <-- Animación para el fondo */
+}
+
+/* El contenedor blanco del contenido */
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 900px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: scaleUp 0.3s ease-out; /* <-- Animación para el contenido */
+}
+
+/* El botón de cerrar (la 'X') */
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #333;
+}
+
+/* El cuerpo del modal que contiene imagen e info */
+.modal-body {
+    display: flex;
+    gap: 30px; /* Espacio entre la imagen y la info */
+}
+
+/* Contenedor de la imagen */
+.modal-image {
+    flex: 1; /* Ocupa una parte del espacio */
+}
+
+.modal-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Contenedor de la información */
+.modal-info {
+    flex: 2; /* Ocupa dos partes del espacio (más grande) */
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-info h2 {
+    margin-top: 0;
+}
+
+.modal-info .product-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745;
+    margin-top: auto; /* Empuja el precio y botón hacia abajo */
+}
+
+#modal-add-to-cart-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+/* Estilo para el nuevo botón 'Ver Producto' */
+.view-product-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 5px; /* Espacio con el botón de abajo */
+}
