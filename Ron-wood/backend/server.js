@@ -13,7 +13,6 @@ dotenv.config({ path: './backend/.env' });
 // 🔹 Conexiones a MongoDB
 // ============================
 
-
 // Conexión Login + Proveedores con manejo de errores
 const connLogin = mongoose.createConnection(process.env.MONGO_URI_LOGIN, {
   useNewUrlParser: true,
@@ -43,8 +42,6 @@ const connReportes = mongoose.createConnection(process.env.MONGO_URI_REPORTES, {
   useUnifiedTopology: true,
   dbName: "reportes"
 });
-
-
 
 connReportes.once("open", () => console.log("✅ MongoDB Reportes conectado"));
 
